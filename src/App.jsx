@@ -334,13 +334,9 @@ const Hero = () => {
                         className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm appearance-none text-gray-700"
                       >
                         <option value="">Select Product</option>
-                        <option>Moringa powder</option>
-                        <option>Lakadong Turmeric</option>
-                        <option>Saffron Strands</option>
-                        <option>Shatawari</option>
-                        <option>Ashwgandha</option>
-                        <option>Rice</option>
-                        <option>Alfalfa Powder</option>
+                        {PRODUCTS.map(p => (
+                          <option key={p.id} value={p.name}>{p.name}</option>
+                        ))}
                       </select>
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                         <ChevronRight className="rotate-90" size={16} />
@@ -845,11 +841,9 @@ Requirements: ${formData.message}`;
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors appearance-none text-sm"
                     >
                       <option value="" className="bg-brand-primary">Select a product</option>
-                      <option className="bg-brand-primary">Moringa Powder</option>
-                      <option className="bg-brand-primary">Lakadong Turmeric</option>
-                      <option className="bg-brand-primary">Saffron Strands</option>
-                      <option className="bg-brand-primary">Rice</option>
-                      <option className="bg-brand-primary">Alfalfa Powder</option>
+                      {PRODUCTS.map(p => (
+                        <option key={p.id} value={p.name} className="bg-brand-primary">{p.name}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
