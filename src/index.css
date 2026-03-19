@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  
+  --color-brand-primary: #2d4a22; /* Deep forest green */
+  --color-brand-secondary: #c88d32; /* Saffron/Turmeric gold */
+  --color-brand-accent: #f5f2ed; /* Warm cream */
+}
+
+@layer utilities {
+  .neo-flat {
+    background: var(--color-brand-accent);
+    box-shadow: 6px 6px 12px #e1dfda, -6px -6px 12px #ffffff;
+  }
+  
+  .neo-inset {
+    background: var(--color-brand-accent);
+    box-shadow: inset 6px 6px 12px #e1dfda, inset -6px -6px 12px #ffffff;
+  }
+  
+  .neo-button {
+    background: var(--color-brand-accent);
+    box-shadow: 4px 4px 8px #e1dfda, -4px -4px 8px #ffffff;
+    transition: all 0.2s ease;
+  }
+  
+  .neo-button:active {
+    box-shadow: inset 2px 2px 5px #e1dfda, inset -2px -2px 5px #ffffff;
+  }
+
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
