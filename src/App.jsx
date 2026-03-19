@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { 
   Leaf, 
   ShieldCheck, 
@@ -53,7 +55,7 @@ const PRODUCTS = [
     description: 'Traditional Ayurvedic herb for hormonal balance and vitality.',
     longDescription: 'Shatawari (Asparagus racemosus) is the premier Ayurvedic herb for female health. Our organic roots are sustainably harvested and processed.',
     benefits: ['Hormonal Balance', 'Supports Reproductive Health', 'Adaptogenic Properties', 'Digestive Support'],
-    image: '/assets/images/Shatawari.jpg'
+    image: '/assets/images/Shatwari Powder.png'
   },
   {
     id: '5',
@@ -80,7 +82,7 @@ const PRODUCTS = [
     description: 'A nutrient-rich powder from the leaves of the alfalfa plant.',
     longDescription: 'Our Alfalfa Powder is a powerhouse of vitamins and minerals, perfect for smoothies and health drinks.',
     benefits: ['Rich in Vitamin K', 'Good Source of Antioxidants', 'May Help Lower Cholesterol', 'Supports Healthy Digestion'],
-    image: '/assets/images/Alfalfa powder.jpg'
+    image: '/assets/images/Alfa Powder.png'
   }
 ];
 
@@ -113,17 +115,17 @@ const ProductModal = ({ product, onClose }) => {
       <motion.div 
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        className="bg-brand-accent w-full max-w-4xl rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row relative"
+        className="bg-brand-accent w-full max-w-4xl rounded-3xl md:rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row relative max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 p-2 bg-white/80 backdrop-blur-md rounded-full hover:bg-white transition-colors"
+          className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-2 bg-white/80 backdrop-blur-md rounded-full hover:bg-white transition-colors"
         >
-          <X size={24} />
+          <X size={20} className="md:w-6 md:h-6" />
         </button>
 
-        <div className="md:w-1/2 aspect-[4/5] md:aspect-auto">
+        <div className="md:w-1/2 h-64 md:h-auto relative">
           <img 
             src={product.image} 
             alt={product.name} 
@@ -132,21 +134,21 @@ const ProductModal = ({ product, onClose }) => {
           />
         </div>
 
-        <div className="md:w-1/2 p-8 md:p-12 overflow-y-auto max-h-[80vh] md:max-h-none">
-          <span className="text-brand-secondary font-bold uppercase tracking-widest text-xs mb-4 block">
+        <div className="md:w-1/2 p-6 md:p-12 overflow-y-auto">
+          <span className="text-brand-secondary font-bold uppercase tracking-widest text-[10px] md:text-xs mb-3 md:mb-4 block">
             {product.category}
           </span>
-          <h2 className="text-4xl font-serif text-brand-primary mb-6">{product.name}</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-serif text-brand-primary mb-4 md:mb-6">{product.name}</h2>
+          <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 leading-relaxed">
             {product.longDescription}
           </p>
 
-          <div className="mb-8">
-            <h4 className="font-serif text-xl mb-4 text-brand-primary">Key Benefits</h4>
-            <ul className="grid grid-cols-1 gap-3">
+          <div className="mb-6 md:mb-8">
+            <h4 className="font-serif text-lg md:text-xl mb-3 md:mb-4 text-brand-primary">Key Benefits</h4>
+            <ul className="grid grid-cols-1 gap-2 md:gap-3">
               {product.benefits.map((benefit, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
-                  <CheckCircle2 className="text-brand-secondary shrink-0" size={18} />
+                <li key={i} className="flex items-center gap-3 text-xs md:text-sm text-gray-700">
+                  <CheckCircle2 className="text-brand-secondary shrink-0" size={16} />
                   {benefit}
                 </li>
               ))}
@@ -158,7 +160,7 @@ const ProductModal = ({ product, onClose }) => {
               onClose();
               handleWhatsAppInquiry(product.name);
             }}
-            className="w-full bg-brand-primary text-white py-4 rounded-2xl font-bold hover:bg-opacity-90 transition-all shadow-lg"
+            className="w-full bg-brand-primary text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-opacity-90 transition-all shadow-lg text-sm md:text-base"
           >
             Inquire on WhatsApp
           </button>
@@ -188,9 +190,9 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
+        <div className="flex justify-between h-16 md:h-20 items-center">
           <div className="flex items-center">
-            <span className="text-2xl font-serif font-bold text-[#2d4d2e] tracking-tight">
+            <span className="text-xl md:text-2xl font-serif font-bold text-[#2d4d2e] tracking-tight truncate">
               Natural PranVayu
             </span>
           </div>
@@ -208,49 +210,54 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2">
-              {isOpen ? <X /> : <Menu />}
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[#2d4d2e]">
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-white border-b border-black/5 px-4 pt-2 pb-6 space-y-4"
-        >
-          <button onClick={() => scrollToSection('products')} className="block text-lg font-serif w-full text-left">Products</button>
-          <button onClick={() => scrollToSection('about')} className="block text-lg font-serif w-full text-left">Our Story</button>
-          <button onClick={() => scrollToSection('why-us')} className="block text-lg font-serif w-full text-left">Why Choose Us</button>
-          <button 
-            onClick={handleWhatsAppInquiry}
-            className="w-full block bg-[#2d4d2e] text-white px-6 py-3 rounded-xl text-center font-medium"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-black/5 px-4 pt-2 pb-6 space-y-4 overflow-hidden"
           >
-            Inquire Now
-          </button>
-        </motion.div>
-      )}
+            <button onClick={() => scrollToSection('products')} className="block text-lg font-serif w-full text-left py-2 border-b border-gray-50">Products</button>
+            <button onClick={() => scrollToSection('about')} className="block text-lg font-serif w-full text-left py-2 border-b border-gray-50">Our Story</button>
+            <button onClick={() => scrollToSection('why-us')} className="block text-lg font-serif w-full text-left py-2 border-b border-gray-50">Why Choose Us</button>
+            <button 
+              onClick={handleWhatsAppInquiry}
+              className="w-full block bg-[#2d4d2e] text-white px-6 py-3 rounded-xl text-center font-medium mt-4"
+            >
+              Inquire Now
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
 
 const Hero = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', product: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', product: '' });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleWhatsAppInquiry = (e) => {
     e.preventDefault();
     const phone = "919217914166";
-    const message = `Hello, I am ${formData.name} (${formData.email}). I am interested in inquiring about ${formData.product || 'your products'}. Please provide more details.`;
+    const message = `Hello, I am ${formData.name} (${formData.email}, Phone: ${formData.phone}). I am interested in inquiring about ${formData.product || 'your products'}. Please provide more details.`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    setSubmitted(true);
   };
 
   return (
     <section className="relative min-h-screen flex items-center bg-[#fbfaf7] pt-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Text Section */}
           <motion.div
@@ -259,63 +266,92 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="text-left"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#f4e4c1] text-[#b48c34] text-[10px] font-bold uppercase tracking-widest mb-8">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#f4e4c1] text-[#b48c34] text-[10px] font-bold uppercase tracking-widest mb-6 md:mb-8">
               Global Natural Exports
             </span>
-            <h1 className="text-6xl md:text-7xl lg:text-[84px] font-serif leading-[1.05] text-[#2d4d2e] mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[84px] font-serif leading-[1.1] text-[#2d4d2e] mb-6 md:mb-8">
               Nature's Purest <br />
               <span className="italic text-[#b48c34]">Essence</span> Delivered.
             </h1>
-            <p className="text-lg text-gray-500 mb-12 max-w-lg leading-relaxed">
+            <p className="text-base md:text-lg text-gray-500 mb-8 md:mb-12 max-w-lg leading-relaxed">
               Natural PranVayu Exports brings you the finest organic superfoods and spices from the heart of India. Sustainably sourced, ethically processed.
             </p>
 
             {/* Quick Inquiry Form */}
-            <div className="bg-white p-8 rounded-[32px] shadow-xl border border-black/5 max-w-md">
-              <h3 className="text-xl font-serif mb-6 text-gray-800">Quick Inquiry</h3>
-              <form className="space-y-4" onSubmit={handleWhatsAppInquiry}>
-                <div className="grid grid-cols-2 gap-4">
-                  <input 
-                    type="text" 
-                    placeholder="Name" 
-                    required 
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm placeholder:text-gray-400" 
-                  />
-                  <input 
-                    type="email" 
-                    placeholder="Email" 
-                    required 
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm placeholder:text-gray-400" 
-                  />
-                </div>
-                <div className="relative">
-                  <select 
-                    required 
-                    value={formData.product}
-                    onChange={(e) => setFormData({ ...formData, product: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm appearance-none text-gray-700"
-                  >
-                    <option value="">Select Product</option>
-                    <option>Moringa powder</option>
-                    <option>Lakadong Turmeric</option>
-                    <option>Saffron Strands</option>
-                    <option>Shatawari</option>
-                    <option>Ashwgandha</option>
-                    <option>Rice</option>
-                    <option>Alfalfa Powder</option>
-                  </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                    <ChevronRight className="rotate-90" size={16} />
+            <div className="bg-white p-6 md:p-8 rounded-3xl md:rounded-[32px] shadow-xl border border-black/5 max-w-md">
+              {submitted ? (
+                <div className="text-center py-8 md:py-10 space-y-4">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-green-50 rounded-full flex items-center justify-center text-green-600 mx-auto mb-4 md:mb-6">
+                    <CheckCircle2 size={32} />
                   </div>
+                  <h3 className="text-xl md:text-2xl font-serif text-brand-primary">Thank You!</h3>
+                  <p className="text-sm md:text-base text-gray-500">Your query has been submitted. We will reach you soon. Thanks for showing interest.</p>
+                  <button 
+                    onClick={() => setSubmitted(false)}
+                    className="text-brand-secondary font-bold text-xs md:text-sm hover:underline"
+                  >
+                    Send another inquiry
+                  </button>
                 </div>
-                <button type="submit" className="w-full bg-[#b48c34] text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#b48c34]/20">
-                  Get Pricing on WhatsApp <ArrowRight size={18} />
-                </button>
-              </form>
+              ) : (
+                <>
+                  <h3 className="text-lg md:text-xl font-serif mb-4 md:mb-6 text-gray-800">Quick Inquiry</h3>
+                  <form className="space-y-4" onSubmit={handleWhatsAppInquiry}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <input 
+                        type="text" 
+                        placeholder="Name" 
+                        required 
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm placeholder:text-gray-400" 
+                      />
+                      <input 
+                        type="email" 
+                        placeholder="Email" 
+                        required 
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm placeholder:text-gray-400" 
+                      />
+                    </div>
+                    <div className="phone-input-container">
+                      <PhoneInput
+                        country={'in'}
+                        value={formData.phone}
+                        onChange={(phone) => setFormData({ ...formData, phone })}
+                        containerClass="!w-full"
+                        inputClass="!w-full !h-12 !bg-gray-50 !border-gray-100 !rounded-xl !text-sm focus:!border-[#b48c34] focus:!ring-1 focus:!ring-[#b48c34]"
+                        buttonClass="!bg-gray-50 !border-gray-100 !rounded-l-xl"
+                        placeholder="Phone Number"
+                      />
+                    </div>
+                    <div className="relative">
+                      <select 
+                        required 
+                        value={formData.product}
+                        onChange={(e) => setFormData({ ...formData, product: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-[#b48c34] focus:ring-1 focus:ring-[#b48c34] outline-none text-sm appearance-none text-gray-700"
+                      >
+                        <option value="">Select Product</option>
+                        <option>Moringa powder</option>
+                        <option>Lakadong Turmeric</option>
+                        <option>Saffron Strands</option>
+                        <option>Shatawari</option>
+                        <option>Ashwgandha</option>
+                        <option>Rice</option>
+                        <option>Alfalfa Powder</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                        <ChevronRight className="rotate-90" size={16} />
+                      </div>
+                    </div>
+                    <button type="submit" className="w-full bg-[#b48c34] text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-[#b48c34]/20">
+                      Get Pricing on WhatsApp <ArrowRight size={18} />
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </motion.div>
 
@@ -367,20 +403,20 @@ const Hero = () => {
 
 const QuickCategories = ({ scrollToSection }) => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {CATEGORIES.map((cat, idx) => (
             <motion.div
               key={cat.name}
               whileHover={{ y: -10 }}
-              className="p-8 rounded-3xl border border-black/5 bg-brand-accent/30 flex flex-col items-center text-center group cursor-pointer"
+              className="p-6 md:p-8 rounded-2xl md:rounded-3xl border border-black/5 bg-brand-accent/30 flex flex-col items-center text-center group cursor-pointer"
               onClick={() => scrollToSection('products')}
             >
-              <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                <cat.icon size={32} />
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white shadow-sm flex items-center justify-center text-brand-primary mb-4 md:mb-6 group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                <cat.icon className="w-6 h-6 md:w-8 md:h-8" />
               </div>
-              <h3 className="text-xl font-serif mb-2">{cat.name}</h3>
+              <h3 className="text-base md:text-xl font-serif mb-2">{cat.name}</h3>
             </motion.div>
           ))}
         </div>
@@ -391,41 +427,41 @@ const QuickCategories = ({ scrollToSection }) => {
 
 const FeaturedProduct = ({ onQuickView }) => {
   return (
-    <section className="py-24 bg-brand-primary text-white overflow-hidden relative">
+    <section className="py-16 md:py-24 bg-brand-primary text-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="">
             <div className="relative">
               <img 
                 src="/assets/images/Moringa powder.jpg" 
                 alt="Featured Moringa" 
-                className="rounded-[60px] shadow-2xl relative z-10"
+                className="rounded-3xl md:rounded-[60px] shadow-2xl relative z-10 w-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute -inset-4 border border-white/20 rounded-[64px] -z-10" />
+              <div className="absolute -inset-4 border border-white/20 rounded-[40px] md:rounded-[64px] -z-10" />
             </div>
           </div>
           
           <div className="">
-            <span className="text-brand-secondary font-bold tracking-[0.3em] uppercase text-xs mb-6 block">Product Spotlight</span>
-            <h2 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
+            <span className="text-brand-secondary font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-4 md:mb-6 block">Product Spotlight</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif mb-6 md:mb-8 leading-tight">
               Moringa Powder: <br />
               <span className="italic opacity-80">The Miracle Tree</span>
             </h2>
-            <p className="text-lg text-white/70 mb-10 leading-relaxed">
+            <p className="text-base md:text-lg text-white/70 mb-8 md:mb-10 leading-relaxed">
               Our Moringa powder is sourced from the fertile lands of Southern India. Packed with over 90 nutrients and 46 antioxidants, it is nature's most nutrient-dense superfood for vitality and wellness.
             </p>
-            <ul className="space-y-4 mb-12">
+            <ul className="space-y-3 md:space-y-4 mb-8 md:mb-12">
               {['Rich in Vitamins A, C, and E', 'Boosts Immune System', 'Natural Energy Enhancer', 'Anti-inflammatory Properties'].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm font-medium">
-                  <CheckCircle2 className="text-brand-secondary" size={20} />
+                <li key={item} className="flex items-center gap-3 text-xs md:text-sm font-medium">
+                  <CheckCircle2 className="text-brand-secondary" size={18} />
                   {item}
                 </li>
               ))}
             </ul>
             <button 
               onClick={() => onQuickView(PRODUCTS.find(p => p.name === 'Moringa powder'))}
-              className="px-10 py-4 border border-white/30 rounded-full hover:bg-white hover:text-brand-primary transition-all font-bold"
+              className="w-full md:w-auto px-10 py-3 md:py-4 border border-white/30 rounded-full hover:bg-white hover:text-brand-primary transition-all font-bold text-sm md:text-base"
             >
               View Specifications
             </button>
@@ -434,7 +470,7 @@ const FeaturedProduct = ({ onQuickView }) => {
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-secondary/5 skew-x-12 transform translate-x-1/2" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-secondary/5 skew-x-12 transform translate-x-1/2 hidden md:block" />
     </section>
   );
 };
@@ -451,21 +487,21 @@ const ProductGrid = ({ onQuickView }) => {
     });
 
   return (
-    <section id="products" className="py-24 bg-brand-accent">
+    <section id="products" className="py-16 md:py-24 bg-brand-accent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-serif mb-4">From the Basket</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">Premium quality natural products processed with care and exported globally.</p>
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-serif mb-4">From the Basket</h2>
+          <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto">Premium quality natural products processed with care and exported globally.</p>
         </div>
 
         {/* Filters & Sorting */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-          <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 md:mb-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
             {['All', ...new Set(PRODUCTS.map(p => p.category))].map(cat => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all ${
                   filter === cat 
                     ? 'bg-brand-primary text-white shadow-lg' 
                     : 'neo-button text-gray-600 hover:text-brand-primary'
@@ -477,27 +513,27 @@ const ProductGrid = ({ onQuickView }) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-sm font-medium text-gray-500">Sort by Name:</span>
+            <span className="text-xs md:text-sm font-medium text-gray-500">Sort:</span>
             <button 
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="neo-button p-2.5 rounded-xl text-brand-primary"
+              className="neo-button p-2 md:p-2.5 rounded-xl text-brand-primary text-xs md:text-sm font-bold"
             >
               {sortOrder === 'asc' ? 'A-Z' : 'Z-A'}
             </button>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {filteredProducts.map((product) => (
             <motion.div 
               key={product.id}
               layout
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -10 }}
-              className="group neo-flat p-4 rounded-[40px] transition-all"
+              whileHover={{ y: -5 }}
+              className="group neo-flat p-4 rounded-3xl md:rounded-[40px] transition-all"
             >
-              <div className="aspect-[3/4] rounded-[32px] overflow-hidden mb-6 relative">
+              <div className="aspect-[3/4] rounded-2xl md:rounded-[32px] overflow-hidden mb-4 md:mb-6 relative">
                 <img 
                   src={product.image} 
                   alt={product.name} 
@@ -505,22 +541,22 @@ const ProductGrid = ({ onQuickView }) => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest">
+                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
                     {product.category}
                   </span>
                 </div>
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button 
                     onClick={() => onQuickView(product)}
-                    className="bg-white text-brand-primary px-6 py-3 rounded-full font-bold text-sm shadow-xl hover:scale-105 transition-transform"
+                    className="bg-white text-brand-primary px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm shadow-xl hover:scale-105 transition-transform"
                   >
                     Quick View
                   </button>
                 </div>
               </div>
-              <div className="px-4 pb-4">
-                <h3 className="text-2xl font-serif mb-2 group-hover:text-brand-secondary transition-colors">{product.name}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{product.description}</p>
+              <div className="px-2 md:px-4 pb-2 md:pb-4 text-center sm:text-left">
+                <h3 className="text-xl md:text-2xl font-serif mb-2 group-hover:text-brand-secondary transition-colors">{product.name}</h3>
+                <p className="text-xs md:text-sm text-gray-500 leading-relaxed line-clamp-2">{product.description}</p>
               </div>
             </motion.div>
           ))}
@@ -532,20 +568,20 @@ const ProductGrid = ({ onQuickView }) => {
 
 const StoryBanner = () => {
   return (
-    <section id="about" className="py-24 bg-white overflow-hidden">
+    <section id="about" className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-brand-accent rounded-[60px] p-12 md:p-20 relative overflow-hidden neo-flat"
+          className="bg-brand-accent rounded-3xl md:rounded-[60px] p-6 md:p-20 relative overflow-hidden neo-flat"
         >
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 max-w-3xl text-center md:text-left">
             <motion.h2 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl md:text-6xl font-serif mb-8 leading-tight text-brand-primary"
+              className="text-3xl md:text-6xl font-serif mb-6 md:mb-8 leading-tight text-brand-primary"
             >
               From Indian Soil to <br />
               <span className="italic">Global Doorsteps.</span>
@@ -554,11 +590,11 @@ const StoryBanner = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-lg text-gray-600 mb-10 leading-relaxed"
+              className="text-base md:text-lg text-gray-600 mb-8 md:mb-10 leading-relaxed"
             >
               At Natural PranVayu, we believe in the power of nature. Our journey started with a simple mission: to bridge the gap between local organic farmers and the global market, ensuring that the purity of Indian herbs and spices reaches every corner of the world.
             </motion.p>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-8">
               {[
                 { val: '15+', label: 'Countries Served' },
                 { val: '500+', label: 'Farmers Partnered' },
@@ -570,8 +606,8 @@ const StoryBanner = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.6 + i * 0.1 }}
                 >
-                  <p className="text-4xl font-serif text-brand-secondary mb-1">{stat.val}</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{stat.label}</p>
+                  <p className="text-2xl md:text-4xl font-serif text-brand-secondary mb-1">{stat.val}</p>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-400">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -586,7 +622,7 @@ const StoryBanner = () => {
               rotate: { duration: 40, repeat: Infinity, ease: "linear" },
               scale: { duration: 10, repeat: Infinity, ease: "easeInOut" }
             }}
-            className="absolute right-0 bottom-0 w-1/2 h-full opacity-10 pointer-events-none"
+            className="absolute right-0 bottom-0 w-full md:w-1/2 h-full opacity-10 pointer-events-none"
           >
              <Globe size={600} className="text-brand-primary translate-x-1/4 translate-y-1/4" />
           </motion.div>
@@ -605,21 +641,21 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-white">
+    <section id="why-us" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-brand-secondary font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Our Excellence</span>
-          <h2 className="text-5xl font-serif">Why Partner with Us?</h2>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-secondary font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-4 block">Our Excellence</span>
+          <h2 className="text-3xl md:text-5xl font-serif">Why Partner with Us?</h2>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {features.map((f, i) => (
-            <div key={i} className="p-10 rounded-[40px] border border-black/5 hover:border-brand-secondary/30 transition-all group">
-              <div className="w-14 h-14 rounded-2xl bg-brand-accent flex items-center justify-center text-brand-primary mb-8 group-hover:scale-110 transition-transform">
-                <f.icon size={28} />
+            <div key={i} className="p-8 md:p-10 rounded-3xl md:rounded-[40px] border border-black/5 hover:border-brand-secondary/30 transition-all group">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-brand-accent flex items-center justify-center text-brand-primary mb-6 md:mb-8 group-hover:scale-110 transition-transform">
+                <f.icon className="w-6 h-6 md:w-7 md:h-7" />
               </div>
-              <h3 className="text-xl font-serif mb-4">{f.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+              <h3 className="text-lg md:text-xl font-serif mb-3 md:mb-4">{f.title}</h3>
+              <p className="text-xs md:text-sm text-gray-500 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -630,24 +666,24 @@ const WhyChooseUs = () => {
 
 const Certifications = () => {
   return (
-    <section className="py-20 bg-brand-accent/50 border-y border-black/5">
+    <section className="py-12 md:py-20 bg-brand-accent/50 border-y border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all">
           <div className="flex flex-col items-center gap-2">
-            <Award size={48} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">ISO 9001:2015</span>
+            <Award className="w-8 h-8 md:w-12 md:h-12" />
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest">ISO 9001:2015</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <ShieldCheck size={48} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">HACCP Certified</span>
+            <ShieldCheck className="w-8 h-8 md:w-12 md:h-12" />
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest">HACCP Certified</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Leaf size={48} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">USDA Organic</span>
+            <Leaf className="w-8 h-8 md:w-12 md:h-12" />
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest">USDA Organic</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <CheckCircle2 size={48} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">FSSAI Approved</span>
+            <CheckCircle2 className="w-8 h-8 md:w-12 md:h-12" />
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest">FSSAI Approved</span>
           </div>
         </div>
       </div>
@@ -657,18 +693,18 @@ const Certifications = () => {
 
 const PackagingSection = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-5xl font-serif mb-8 leading-tight">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="text-center lg:text-left">
+            <h2 className="text-3xl md:text-5xl font-serif mb-6 md:mb-8 leading-tight">
               Premium Packaging <br />
               <span className="italic">Built for Export.</span>
             </h2>
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-600 mb-8 md:mb-10 leading-relaxed">
               We understand that international transit requires robust and secure packaging. Our solutions are designed to preserve freshness, aroma, and quality while complying with global labeling standards.
             </p>
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6 text-left max-w-md mx-auto lg:mx-0">
               {[
                 { t: 'Vacuum Sealed', d: 'Ensures zero moisture entry and long shelf life.' },
                 { t: 'Bulk & Retail', d: 'Available in 100g to 25kg industrial packs.' },
@@ -676,22 +712,22 @@ const PackagingSection = () => {
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="mt-1">
-                    <div className="w-6 h-6 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-secondary">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-secondary">
                       <CheckCircle2 size={14} />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm mb-1">{item.t}</h4>
-                    <p className="text-xs text-gray-500">{item.d}</p>
+                    <h4 className="font-bold text-sm md:text-base mb-1">{item.t}</h4>
+                    <p className="text-[10px] md:text-xs text-gray-500">{item.d}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-6">
-            <img src="https://images.unsplash.com/photo-1589365278144-c9e705f843ba?q=80&w=400&auto=format&fit=crop" alt="Packaging 1" className="rounded-3xl shadow-lg" referrerPolicy="no-referrer" />
-            <img src="https://images.unsplash.com/photo-1628102422203-997c88195867?q=80&w=400&auto=format&fit=crop" alt="Packaging 2" className="rounded-3xl shadow-lg mt-12" referrerPolicy="no-referrer" />
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
+            <img src="/assets/images/pack1.png" alt="Packaging 1" className="rounded-2xl md:rounded-3xl shadow-lg w-full h-48 md:h-64 object-cover" referrerPolicy="no-referrer" />
+            <img src="/assets/images/pack2.png" alt="Packaging 2" className="rounded-2xl md:rounded-3xl shadow-lg w-full h-48 md:h-64 object-cover mt-8 md:mt-12" referrerPolicy="no-referrer" />
           </div>
         </div>
       </div>
@@ -703,112 +739,149 @@ const InquiryForm = () => {
   const [formData, setFormData] = useState({ 
     name: '', 
     email: '', 
+    phone: '',
     company: '', 
     product: '', 
     quantity: '', 
     message: '' 
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleWhatsAppInquiry = (e) => {
     e.preventDefault();
     const phone = "919217914166";
     const waMessage = `Hello, I am ${formData.name} from ${formData.company}. 
 Email: ${formData.email}
+Phone: ${formData.phone}
 Product: ${formData.product}
 Quantity: ${formData.quantity}
 Requirements: ${formData.message}`;
     
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(waMessage)}`, '_blank');
+    setSubmitted(true);
   };
 
   return (
-    <section id="inquiry" className="py-24 bg-brand-primary text-white">
+    <section id="inquiry" className="py-20 md:py-24 bg-brand-primary text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-serif mb-4">Request a Quote</h2>
-            <p className="text-white/60">Fill out the form below and we will connect with you on WhatsApp instantly.</p>
-          </div>
-          
-          <form className="grid md:grid-cols-2 gap-8" onSubmit={handleWhatsAppInquiry}>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Full Name</label>
-                <input 
-                  type="text" 
-                  required 
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors" 
-                />
+          {submitted ? (
+            <div className="text-center py-16 md:py-20 bg-white/5 rounded-3xl md:rounded-[40px] border border-white/10 space-y-6 px-6">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-secondary/20 rounded-full flex items-center justify-center text-brand-secondary mx-auto mb-6">
+                <CheckCircle2 size={40} />
               </div>
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Email Address</label>
-                <input 
-                  type="email" 
-                  required 
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors" 
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Company Name</label>
-                <input 
-                  type="text" 
-                  required 
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors" 
-                />
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Product of Interest</label>
-                <select 
-                  required 
-                  value={formData.product}
-                  onChange={(e) => setFormData({ ...formData, product: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors appearance-none"
-                >
-                  <option value="" className="bg-brand-primary">Select a product</option>
-                  <option className="bg-brand-primary">Moringa Powder</option>
-                  <option className="bg-brand-primary">Lakadong Turmeric</option>
-                  <option className="bg-brand-primary">Saffron Strands</option>
-                  <option className="bg-brand-primary">Rice</option>
-                  <option className="bg-brand-primary">Alfalfa Powder</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Order Quantity (Approx)</label>
-                <input 
-                  type="text" 
-                  required 
-                  value={formData.quantity}
-                  onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors" 
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Message / Requirements</label>
-                <textarea 
-                  rows={1} 
-                  required 
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:border-brand-secondary outline-none transition-colors"
-                ></textarea>
-              </div>
-            </div>
-            
-            <div className="md:col-span-2">
-              <button type="submit" className="w-full bg-brand-secondary text-white py-5 rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-2xl shadow-brand-secondary/20">
-                Submit Inquiry via WhatsApp
+              <h2 className="text-3xl md:text-4xl font-serif">Thank You for Reaching Out!</h2>
+              <p className="text-sm md:text-base text-white/60 max-w-md mx-auto">Your query has been submitted. We will reach you soon. Thanks for showing interest.</p>
+              <button 
+                onClick={() => setSubmitted(false)}
+                className="bg-brand-secondary text-white px-8 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all text-sm md:text-base"
+              >
+                Send Another Inquiry
               </button>
             </div>
-          </form>
+          ) : (
+            <>
+              <div className="text-center mb-12 md:mb-16">
+                <h2 className="text-4xl md:text-5xl font-serif mb-4">Request a Quote</h2>
+                <p className="text-sm md:text-base text-white/60">Fill out the form below and we will connect with you on WhatsApp instantly.</p>
+              </div>
+              
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" onSubmit={handleWhatsAppInquiry}>
+                <div className="space-y-4 md:space-y-6">
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Full Name</label>
+                    <input 
+                      type="text" 
+                      required 
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors text-sm" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Email Address</label>
+                    <input 
+                      type="email" 
+                      required 
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors text-sm" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Phone Number</label>
+                    <div className="phone-input-container dark-theme">
+                      <PhoneInput
+                        country={'in'}
+                        value={formData.phone}
+                        onChange={(phone) => setFormData({ ...formData, phone })}
+                        containerClass="!w-full"
+                        inputClass="!w-full !h-12 !bg-white/5 !border-white/10 !rounded-xl !text-sm focus:!border-brand-secondary !text-white"
+                        buttonClass="!bg-white/5 !border-white/10 !rounded-l-xl"
+                        dropdownClass="!bg-brand-primary !text-white"
+                        placeholder="Phone Number"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Company Name</label>
+                    <input 
+                      type="text" 
+                      required 
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors text-sm" 
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-4 md:space-y-6">
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Product of Interest</label>
+                    <select 
+                      required 
+                      value={formData.product}
+                      onChange={(e) => setFormData({ ...formData, product: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors appearance-none text-sm"
+                    >
+                      <option value="" className="bg-brand-primary">Select a product</option>
+                      <option className="bg-brand-primary">Moringa Powder</option>
+                      <option className="bg-brand-primary">Lakadong Turmeric</option>
+                      <option className="bg-brand-primary">Saffron Strands</option>
+                      <option className="bg-brand-primary">Rice</option>
+                      <option className="bg-brand-primary">Alfalfa Powder</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Order Quantity (Approx)</label>
+                    <input 
+                      type="text" 
+                      required 
+                      value={formData.quantity}
+                      onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors text-sm" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Message / Requirements</label>
+                    <textarea 
+                      rows={4} 
+                      required 
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 md:py-4 focus:border-brand-secondary outline-none transition-colors text-sm resize-none"
+                    ></textarea>
+                  </div>
+                </div>
+                
+                <div className="md:col-span-2">
+                  <button type="submit" className="w-full bg-brand-secondary text-white py-4 md:py-5 rounded-xl font-bold text-base md:text-lg hover:bg-opacity-90 transition-all shadow-2xl shadow-brand-secondary/20">
+                    Submit Inquiry via WhatsApp
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -817,15 +890,15 @@ Requirements: ${formData.message}`;
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-accent pt-24 pb-12 border-t border-black/5">
+    <footer className="bg-brand-accent pt-16 md:pt-24 pb-12 border-t border-black/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          <div className="lg:col-span-1">
-            <h3 className="text-2xl font-serif font-bold text-brand-primary mb-6">Natural PranVayu</h3>
-            <p className="text-sm text-gray-500 leading-relaxed mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-16 md:mb-20">
+          <div className="lg:col-span-1 text-center sm:text-left">
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-brand-primary mb-6">Natural PranVayu</h3>
+            <p className="text-xs md:text-sm text-gray-500 leading-relaxed mb-8">
               Premium exporters of natural and organic products. Dedicated to quality, sustainability, and global health.
             </p>
-            <div className="flex gap-4">
+            <div className="flex justify-center sm:justify-start gap-4">
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
                 <Globe size={18} />
               </a>
@@ -838,50 +911,50 @@ const Footer = () => {
             </div>
           </div>
           
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-8 text-brand-primary">Quick Links</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Home</a></li>
-              <li><a href="#products" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Products</a></li>
-              <li><a href="#about" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Our Story</a></li>
-              <li><a href="#inquiry" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Contact</a></li>
+          <div className="text-center sm:text-left">
+            <h4 className="text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 text-brand-primary">Quick Links</h4>
+            <ul className="space-y-3 md:space-y-4">
+              <li><a href="#" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Home</a></li>
+              <li><a href="#products" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Products</a></li>
+              <li><a href="#about" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Our Story</a></li>
+              <li><a href="#inquiry" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Contact</a></li>
             </ul>
           </div>
           
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-8 text-brand-primary">Products</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Moringa Powder</a></li>
-              <li><a href="#" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Lakadong Turmeric & Saffron Strands</a></li>
-              <li><a href="#" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Ayurvedic Herbs</a></li>
-              <li><a href="#" className="text-sm text-gray-500 hover:text-brand-secondary transition-colors">Basmati Rice</a></li>
+          <div className="text-center sm:text-left">
+            <h4 className="text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 text-brand-primary">Products</h4>
+            <ul className="space-y-3 md:space-y-4">
+              <li><a href="#" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Moringa Powder</a></li>
+              <li><a href="#" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Lakadong Turmeric & Saffron</a></li>
+              <li><a href="#" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Ayurvedic Herbs</a></li>
+              <li><a href="#" className="text-xs md:text-sm text-gray-500 hover:text-brand-secondary transition-colors">Basmati Rice</a></li>
             </ul>
           </div>
           
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-8 text-brand-primary">Contact Us</h4>
-            <ul className="space-y-6">
-              <li className="flex gap-4">
+          <div className="text-center sm:text-left">
+            <h4 className="text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 text-brand-primary">Contact Us</h4>
+            <ul className="space-y-4 md:space-y-6">
+              <li className="flex justify-center sm:justify-start gap-4">
                 <Mail className="text-brand-secondary shrink-0" size={20} />
-                <span className="text-sm text-gray-500">naturalpranavayu@gmail.com</span>
+                <span className="text-xs md:text-sm text-gray-500">naturalpranavayu@gmail.com</span>
               </li>
-              <li className="flex gap-4">
+              <li className="flex justify-center sm:justify-start gap-4">
                 <MapPin className="text-brand-secondary shrink-0" size={20} />
-                <span className="text-sm text-gray-500">New Delhi, India <br /> Global Export Hub</span>
+                <span className="text-xs md:text-sm text-gray-500">New Delhi, India <br /> Global Export Hub</span>
               </li>
-              <li className="flex gap-4">
+              <li className="flex justify-center sm:justify-start gap-4">
                 <Phone className="text-brand-secondary shrink-0" size={20} />
-                <span className="text-sm text-gray-500">+91 92179 14166</span>
+                <span className="text-xs md:text-sm text-gray-500">+91 92179 14166</span>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-gray-400">© 2026 Natural PranVayu Exports. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">Terms of Service</a>
+        <div className="pt-10 md:pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] md:text-xs text-gray-400">© 2026 Natural PranVayu Exports. All rights reserved.</p>
+          <div className="flex gap-6 md:gap-8">
+            <a href="#" className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">Privacy Policy</a>
+            <a href="#" className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

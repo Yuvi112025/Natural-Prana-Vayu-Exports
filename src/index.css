@@ -41,4 +41,25 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  /* Custom Phone Input Styles */
+  .react-tel-input .flag-dropdown {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .react-tel-input .selected-flag:hover,
+  .react-tel-input .selected-flag:focus {
+    background: transparent !important;
+  }
+
+  .dark-theme .react-tel-input .country-list {
+    background-color: #2d4a22 !important; /* matches brand-primary */
+    color: white !important;
+  }
+
+  .dark-theme .react-tel-input .country-list .country:hover,
+  .dark-theme .react-tel-input .country-list .country.highlight {
+    background-color: #c88d32 !important; /* matches brand-secondary */
+  }
 }
