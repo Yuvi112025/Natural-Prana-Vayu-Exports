@@ -16,7 +16,10 @@ import {
   ArrowRight,
   CheckCircle2,
   Award,
-  Globe
+  Globe,
+  Instagram,
+  Facebook,
+  Twitter
 } from 'lucide-react';
 
 // --- Data ---
@@ -360,7 +363,7 @@ const Hero = () => {
           >
             <div className="relative rounded-[40px] overflow-hidden aspect-[4/5] shadow-2xl">
               <img 
-                src="/Hero-image.png" 
+                src="/Hero.png" 
                 alt="Natural Products" 
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
@@ -893,11 +896,14 @@ const Footer = () => {
               Premium exporters of natural and organic products. Dedicated to quality, sustainability, and global health.
             </p>
             <div className="flex justify-center sm:justify-start gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
-                <Globe size={18} />
+              <a href="https://www.instagram.com/naturalpranavayu/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
+                <Instagram size={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
-                <ShieldCheck size={18} />
+              <a href="https://x.com/naturalpranavayu" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
+                <Twitter size={18} />
+              </a>
+              <a href="https://www.facebook.com/login/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
+                <Facebook size={18} />
               </a>
               <a href="mailto:naturalpranavayu@gmail.com" className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-gray-400 hover:text-brand-primary hover:neo-button transition-all">
                 <Mail size={18} />
